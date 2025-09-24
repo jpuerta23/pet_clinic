@@ -8,39 +8,91 @@ public static class PatientService
     {
         try
         {
-            var patient = new Patient
+            var patient = new Patient();
+
+            // Validar Id
+            int id;
+            while (true)
             {
-                // Valores temporales para cumplir con 'required'
-                Name = string.Empty,
-                Pet = new Pet()
-            };
+                Console.Write("Enter patient Id: ");
+                if (int.TryParse(Console.ReadLine(), out id) && id > 0)
+                    break;
+                Console.WriteLine("❌ Invalid Id. Please enter a positive number.");
+            }
+            patient.Id = id;
 
+            // Validar nombre
+            string name;
+            do
+            {
+                Console.Write("Enter patient name: ");
+                name = Console.ReadLine() ?? "";
+                if (string.IsNullOrWhiteSpace(name))
+                    Console.WriteLine("❌ Name cannot be empty.");
+            } while (string.IsNullOrWhiteSpace(name));
+            patient.Name = name;
 
-            Console.Write("Enter patient Id: ");
-            patient.Id = int.Parse(Console.ReadLine() ?? "0");
+            // Validar edad
+            int age;
+            while (true)
+            {
+                Console.Write("Enter patient age: ");
+                if (int.TryParse(Console.ReadLine(), out age) && age > 0)
+                    break;
+                Console.WriteLine("❌ Invalid age. Please enter a positive number.");
+            }
+            patient.Age = age;
 
-            Console.Write("Enter patient name: ");
-            patient.Name = Console.ReadLine() ?? "";
+            // Validar síntoma
+            string symptom;
+            do
+            {
+                Console.Write("Enter patient symptom: ");
+                symptom = Console.ReadLine() ?? "";
+                if (string.IsNullOrWhiteSpace(symptom))
+                    Console.WriteLine("❌ Symptom cannot be empty.");
+            } while (string.IsNullOrWhiteSpace(symptom));
+            patient.Symptom = symptom;
 
-            Console.Write("Enter patient age: ");
-            patient.Age = int.Parse(Console.ReadLine() ?? "0");
-
-            Console.Write("Enter patient symptom: ");
-            patient.Symptom = Console.ReadLine() ?? "";
-
-            // Related pet
+            // --- Mascota ---
             var pet = new Pet();
-            Console.Write("Enter pet name: ");
-            pet.Name = Console.ReadLine() ?? "";
 
-            Console.Write("Enter pet type: ");
-            pet.Type = Console.ReadLine() ?? "";
+            // Validar nombre de mascota
+            string petName;
+            do
+            {
+                Console.Write("Enter pet name: ");
+                petName = Console.ReadLine() ?? "";
+                if (string.IsNullOrWhiteSpace(petName))
+                    Console.WriteLine("❌ Pet name cannot be empty.");
+            } while (string.IsNullOrWhiteSpace(petName));
+            pet.Name = petName;
 
-            Console.Write("Enter pet age: ");
-            pet.Age = int.Parse(Console.ReadLine() ?? "0");
+            // Validar tipo de mascota
+            string petType;
+            do
+            {
+                Console.Write("Enter pet type: ");
+                petType = Console.ReadLine() ?? "";
+                if (string.IsNullOrWhiteSpace(petType))
+                    Console.WriteLine("❌ Pet type cannot be empty.");
+            } while (string.IsNullOrWhiteSpace(petType));
+            pet.Type = petType;
+
+            // Validar edad de mascota
+            int petAge;
+            while (true)
+            {
+                Console.Write("Enter pet age: ");
+                if (int.TryParse(Console.ReadLine(), out petAge) && petAge > 0)
+                    break;
+                Console.WriteLine("❌ Invalid pet age. Please enter a positive number.");
+            }
+            pet.Age = petAge;
 
             patient.Pet = pet;
 
+            // Guardar en la lista
             list.Add(patient);
             Console.WriteLine("✅ Patient registered successfully.");
         }
@@ -50,6 +102,7 @@ public static class PatientService
         }
     }
 
+    // ✅ Nuevo método: listar pacientes
     public static void ListPatients(List<Patient> list)
     {
         if (list.Count == 0)
@@ -65,9 +118,12 @@ public static class PatientService
         }
     }
 
+    // ✅ Nuevo método: buscar paciente por nombre
     public static void SearchPatientByName(List<Patient> list, string name)
     {
-        var patient = list.FirstOrDefault(p => p.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        var patient = list.FirstOrDefault(p =>
+            string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase));
+
         if (patient != null)
         {
             Console.WriteLine($"ID: {patient.Id}, Name: {patient.Name}, Age: {patient.Age}, Symptom: {patient.Symptom}");
@@ -79,4 +135,3 @@ public static class PatientService
         }
     }
 }
-

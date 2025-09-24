@@ -30,18 +30,17 @@ class Program
                     break;
 
                 case "3":
-                    Console.Write("Enter the patient name to search: ");
-                    string name = Console.ReadLine() ?? "";
+                    Console.Write("Enter name to search: ");
+                    var name = Console.ReadLine() ?? "";
                     PatientService.SearchPatientByName(patients, name);
                     break;
 
                 case "4":
                     exit = true;
-                    Console.WriteLine("👋 Exiting the system...");
                     break;
 
                 default:
-                    Console.WriteLine("❌ Invalid option, please try again.");
+                    Console.WriteLine("❌ Invalid option, try again.");
                     break;
             }
         }

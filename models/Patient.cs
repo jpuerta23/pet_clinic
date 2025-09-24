@@ -1,15 +1,17 @@
 namespace HealthClinic.Models;
 
-    public class Patient:Pet
-    {
-       
+public class Patient
+{
+    public int Id { get; set; }
 
-        protected string adrees { get; set; }= string.Empty;
+    // Siempre tendrá un valor inicial, nunca null
+    public string Name { get; set; } = string.Empty;
 
-        protected byte phone { get; set; }
-        public string Symptom { get; set; }= string.Empty;
+    public int Age { get; set; }
 
-        // Relation with Pet
-        public  required Pet Pet { get; set; }
-    }
+    // También con valor inicial
+    public string Symptom { get; set; } = string.Empty;
 
+    // Siempre se inicializa con un objeto Pet vacío
+    public Pet Pet { get; set; } = new Pet();
+}

@@ -1,13 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace HealthClinic.Models;
 
-namespace Pet_Clinic.models
+public class Animal
 {
-    public class Animal
-    {
-        public string raza { get; set; }= string.Empty;
-        public string dueño { get; set; }   = string.Empty;
-    }
+    // Identificador único
+    public int Id { get; set; }
+
+    // Nombre del animal, inicializado para evitar null
+    public string Name { get; set; } = string.Empty;
+
+    // Tipo de animal (ej: perro, gato, ave)
+    public string Type { get; set; } = string.Empty;
+
+    // Edad inicial en 0
+    public int Age { get; set; } = 0;
 }
