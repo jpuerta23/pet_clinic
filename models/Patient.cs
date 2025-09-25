@@ -5,9 +5,9 @@ public class Patient
     public int Id { get; set; }
 
     // Siempre tendrá un valor inicial, nunca null
-    public string Name { get; set; } = string.Empty;
+    public string FullName { get; set; } = string.Empty;
 
-    public int Age { get; set; }
+   
 
     // También con valor inicial
     public string Symptom { get; set; } = string.Empty;

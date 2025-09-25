@@ -25,23 +25,16 @@ public static class PatientService
             string name;
             do
             {
-                Console.Write("Enter patient name: ");
+                Console.Write("Enter patient your FullName: ");
                 name = Console.ReadLine() ?? "";
                 if (string.IsNullOrWhiteSpace(name))
                     Console.WriteLine("❌ Name cannot be empty.");
             } while (string.IsNullOrWhiteSpace(name));
-            patient.Name = name;
+            patient.FullName = name;
 
-            // Validar edad
-            int age;
-            while (true)
-            {
-                Console.Write("Enter patient age: ");
-                if (int.TryParse(Console.ReadLine(), out age) && age > 0)
-                    break;
-                Console.WriteLine("❌ Invalid age. Please enter a positive number.");
-            }
-            patient.Age = age;
+            
+           
+            
 
             // Validar síntoma
             string symptom;
@@ -94,7 +87,7 @@ public static class PatientService
 
             // Guardar en la lista
             list.Add(patient);
-            Console.WriteLine("✅ Patient registered successfully.");
+            Console.WriteLine("✅ Patient and P2et registered successfully.");
         }
         catch (Exception ex)
         {
@@ -113,7 +106,7 @@ public static class PatientService
 
         foreach (var p in list)
         {
-            Console.WriteLine($"ID: {p.Id}, Name: {p.Name}, Age: {p.Age}, Symptom: {p.Symptom}");
+            Console.WriteLine($"ID: {p.Id}, Name: {p.FullName}, Symptom: {p.Symptom}");
             Console.WriteLine($"   Pet: {p.Pet.Name}, Type: {p.Pet.Type}, Age: {p.Pet.Age}");
         }
     }
@@ -122,11 +115,11 @@ public static class PatientService
     public static void SearchPatientByName(List<Patient> list, string name)
     {
         var patient = list.FirstOrDefault(p =>
-            string.Equals(p.Name, name, StringComparison.OrdinalIgnoreCase));
+            string.Equals(p.FullName, name, StringComparison.OrdinalIgnoreCase));
 
         if (patient != null)
         {
-            Console.WriteLine($"ID: {patient.Id}, Name: {patient.Name}, Age: {patient.Age}, Symptom: {patient.Symptom}");
+            Console.WriteLine($"ID: {patient.Id}, Name: {patient.FullName}, Symptom: {patient.Symptom}");
             Console.WriteLine($"   Pet: {patient.Pet.Name}, Type: {patient.Pet.Type}, Age: {patient.Pet.Age}");
         }
         else
