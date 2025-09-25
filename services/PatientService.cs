@@ -10,16 +10,8 @@ public static class PatientService
         {
             var patient = new Patient();
 
-            // Validar Id
-            int id;
-            while (true)
-            {
-                Console.Write("Enter patient Id: ");
-                if (int.TryParse(Console.ReadLine(), out id) && id > 0)
-                    break;
-                Console.WriteLine("❌ Invalid Id. Please enter a positive number.");
-            }
-            patient.Id = id;
+      
+            
 
             // Validar nombre
             string name;
@@ -37,15 +29,15 @@ public static class PatientService
             
 
             // Validar síntoma
-            string symptom;
+            string adress;
             do
             {
-                Console.Write("Enter patient symptom: ");
-                symptom = Console.ReadLine() ?? "";
-                if (string.IsNullOrWhiteSpace(symptom))
+                Console.Write("Enter patient Adree: ");
+                adress = Console.ReadLine() ?? "";
+                if (string.IsNullOrWhiteSpace(adress))
                     Console.WriteLine("❌ Symptom cannot be empty.");
-            } while (string.IsNullOrWhiteSpace(symptom));
-            patient.Symptom = symptom;
+            } while (string.IsNullOrWhiteSpace(adress));
+            patient.adress = adress;
 
             // --- Mascota ---
             var pet = new Pet();
@@ -106,8 +98,8 @@ public static class PatientService
 
         foreach (var p in list)
         {
-            Console.WriteLine($"ID: {p.Id}, Name: {p.FullName}, Symptom: {p.Symptom}");
-            Console.WriteLine($"   Pet: {p.Pet.Name}, Type: {p.Pet.Type}, Age: {p.Pet.Age}");
+            Console.WriteLine($"Name: {p.FullName}, adress: {p.adress}");
+            Console.WriteLine($"   Pet: {p.Pet.Name}, Type: {p.Pet.Type}, Age: {p.Pet.Age} ,owner: {p.Pet.ownerName}, breed: {p.Pet.breed}");
         }
     }
 
@@ -119,7 +111,7 @@ public static class PatientService
 
         if (patient != null)
         {
-            Console.WriteLine($"ID: {patient.Id}, Name: {patient.FullName}, Symptom: {patient.Symptom}");
+            Console.WriteLine($" Name: {patient.FullName}, adreess: {patient.adress}");
             Console.WriteLine($"   Pet: {patient.Pet.Name}, Type: {patient.Pet.Type}, Age: {patient.Pet.Age}");
         }
         else

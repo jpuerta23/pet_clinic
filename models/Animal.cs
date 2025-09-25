@@ -3,7 +3,7 @@ namespace HealthClinic.Models;
 public class Animal
 {
     // Identificador único
-    public int Id { get; set; }
+  
 
     // Nombre del animal, inicializado para evitar null
     public string Name { get; set; } = string.Empty;
@@ -13,4 +13,9 @@ public class Animal
 
     // Edad inicial en 0
     public int Age { get; set; } = 0;
+
+    public virtual string Emitsound()
+{
+    return "Sound genéric animal";
+}
 }

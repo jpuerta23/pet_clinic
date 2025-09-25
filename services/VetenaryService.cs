@@ -11,7 +11,7 @@ public class GeneralConsultation : VeterinaryService
 {
     public override void Attend(Patient patient)
     {
-        Console.WriteLine($"[General Consultation] Patient: {patient.FullName}, Symptom: {patient.Symptom}");
+        Console.WriteLine($"[General Consultation] Patient: {patient.FullName}, adress : {patient.adress}, Pet: {patient.Pet.Name}, Type: {patient.Pet.Type}");
     }
 }
 
