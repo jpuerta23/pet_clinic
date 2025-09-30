@@ -1,10 +1,26 @@
 namespace HealthClinic.Services;
 
 using HealthClinic.Models;
+using pet_clinic.Interfaces;
 
-public abstract class VeterinaryService
+public abstract class VeterinaryService: IAtendible
 {
+    public void Atender()
+    {
+       
+    }
+
     public abstract void Attend(Patient patient);
+
+    public void general_consultation()
+    {
+        
+    }
+
+    public void vaccination()
+    {
+        
+    }
 }
 
 public class GeneralConsultation : VeterinaryService

@@ -2,7 +2,7 @@ using System.Runtime.CompilerServices;
 
 namespace HealthClinic.Models;
 
-public class Patient
+public class Patient: IRegister
 {
 
 
@@ -17,6 +17,14 @@ public class Patient
 
     // Siempre se inicializa con un objeto Pet vacío
     public Pet Pet { get; set; } = new Pet();
+    
+
+    // method to register a patient
+
+    public void Register()
+    {
+        Console.WriteLine("Patient registered successfully.");
+    }
 
 
     // Método para obtener una informacion del paciente

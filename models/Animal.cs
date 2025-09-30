@@ -1,8 +1,8 @@
 namespace HealthClinic.Models;
 
-public class Animal
+public class Animal: IRegister
 {
-    // Identificador único
+   
   
 
     // Nombre del animal, inicializado para evitar null
@@ -15,7 +15,13 @@ public class Animal
     public int Age { get; set; } = 0;
 
     public virtual string Emitsound()
-{
-    return "Sound genéric animal";
-}
+    {
+        return "Sound genéric animal";
+    }
+
+    // method to register an animal
+    public void Register()
+    {
+        Console.WriteLine("Animal registered successfully.");
+    }
 }
