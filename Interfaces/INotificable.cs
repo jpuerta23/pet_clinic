@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace pet_clinic.Interfaces
 {
-    public interface IAtendible
+    public interface INotificable
     {
-        void Attend();
-        
-        void Vaccinationpet();
+        void SendNotify(string message);
     }
 }

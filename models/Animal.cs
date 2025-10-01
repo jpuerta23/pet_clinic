@@ -1,27 +1,58 @@
-namespace HealthClinic.Models;
+using System;
+using System.Collections.Generic;
 
-public class Animal: IRegister
+namespace HealthClinic.Models
 {
-   
-  
-
-    // Nombre del animal, inicializado para evitar null
-    public string Name { get; set; } = string.Empty;
-
-    // Tipo de animal (ej: perro, gato, ave)
-    public string Type { get; set; } = string.Empty;
-
-    // Edad inicial en 0
-    public int Age { get; set; } = 0;
-
-    public virtual string Emitsound()
+    public class Animal : IRegister
     {
-        return "Sound genéric animal";
-    }
+        // Nombre del animal, inicializado para evitar null
+        public string Name { get; set; } = string.Empty;
 
-    // method to register an animal
-    public void Register()
-    {
-        Console.WriteLine("Animal registered successfully.");
+        // Tipo de animal (ej: perro, gato, ave)
+        public string Type { get; set; } = string.Empty;
+
+        // Edad inicial en 0
+        public int Age { get; set; } = 0;
+
+        public virtual string Emitsound()
+        {
+            return "Sound generic animal";
+        }
+
+        // Implementación de IRegister
+        public void Registercustomer(List<Customer> list)
+        {
+            try
+            {
+                // Crear un paciente
+                var customer = new Customer();
+
+                // Pedir datos del paciente
+                Console.Write("Enter customer full name: ");
+                customer.FullName = Console.ReadLine() ?? "Unknown";
+
+                Console.Write("Enter customer address: ");
+                customer.Adress = Console.ReadLine() ?? "Unknown";
+
+                // Asignar el animal actual como la mascota del paciente
+                var pet = new Pet
+                {
+                    Name = this.Name,
+                    Type = this.Type,
+                    Age = this.Age
+                };
+
+                customer.Pet = pet;
+
+                // Guardar en la lista
+                list.Add(customer);
+
+                Console.WriteLine("✅ customer registered successfully with Animal as Pet.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error registering customer: {ex.Message}");
+            }
+        }
     }
 }

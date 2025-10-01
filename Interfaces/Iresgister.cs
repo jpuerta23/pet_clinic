@@ -2,5 +2,5 @@ namespace HealthClinic.Models;
 
 public interface IRegister
 {
-    void Register();
+    void Registercustomer(List<Customer> list);
 }

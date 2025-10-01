@@ -1,19 +1,22 @@
-namespace HealthClinic.Models;
-
-public class Pet : Animal
+namespace HealthClinic.Models
 {
-
-    public string breed { get; set; } = string.Empty;
-    public string ownerName { get; set; } = string.Empty;
-
-    public override string Emitsound()
+    public class Pet : Animal
     {
-        return Type.ToLower() switch
+
+      
+       
+        public string Breed { get; set; } = string.Empty;
+        public string OwnerName { get; set; } = string.Empty;
+
+        public override string Emitsound()
         {
-            "Dog" => "Guau",
-            "Cat" => "Miau",
-            "Bird" => "Pío",
-            _ => "unknown sound"
-        };
+            return Type.ToLower() switch
+            {
+                "Dog" => "Guau",
+                "Cat" => "Miau",
+                "Bird" => "Pío",
+                _ => "unknown sound"
+            };
+        }
     }
 }
