@@ -12,73 +12,77 @@ namespace HealthClinic.Services
 
                 // --- Validar nombre único ---
                 string name;
-                do
+                while (true)
                 {
                     Console.Write("Enter customer FullName: ");
                     name = (Console.ReadLine() ?? "").Trim();
 
-                    if (string.IsNullOrWhiteSpace(name) || name.Length < 3)
+                    if (string.IsNullOrWhiteSpace(name) || name.Length < 4)
                     {
-                        Console.WriteLine("❌ Name must have at least 3 characters.");
-                        continue;
+                        Console.WriteLine("❌ Name must have at least 4 characters.");
+                        continue; 
                     }
 
                     if (list.Any(c => string.Equals(c.FullName, name, StringComparison.OrdinalIgnoreCase)))
                     {
-                        Console.WriteLine("❌ This name already exists. Please enter a different name.");
-                        name = "";
+                        Console.WriteLine("❌ This name already exists. Please enter a different one.");
+                        continue; 
                     }
 
-                } while (string.IsNullOrWhiteSpace(name));
+                    break; 
+                }
                 customer.FullName = name;
 
                 // --- Validar dirección ---
                 string adress;
-                do
+                while (true)
                 {
                     Console.Write("Enter customer Address: ");
                     adress = (Console.ReadLine() ?? "").Trim();
+
                     if (string.IsNullOrWhiteSpace(adress) || adress.Length < 5)
+                    {
                         Console.WriteLine("❌ Address must have at least 5 characters.");
-                } while (string.IsNullOrWhiteSpace(adress) || adress.Length < 5);
+                        continue;
+                    }
+
+                    break;
+                }
                 customer.Adress = adress;
 
                 // --- Mascota ---
                 var pet = new Pet();
 
-                // Validar nombre de mascota (único por dueño)
+                // Validar nombre de mascota
                 string petName;
-                do
+                while (true)
                 {
                     Console.Write("Enter pet name: ");
                     petName = (Console.ReadLine() ?? "").Trim();
 
-                    if (string.IsNullOrWhiteSpace(petName))
+                    if (string.IsNullOrWhiteSpace(petName) || petName.Length < 2)
                     {
-                        Console.WriteLine("❌ Pet name cannot be empty.");
+                        Console.WriteLine("❌ Pet name must have at least 2 characters.");
                         continue;
                     }
-
-                    if (list.Any(c => c.Pet != null &&
-                        string.Equals(c.Pet.Name, petName, StringComparison.OrdinalIgnoreCase) &&
-                        string.Equals(c.FullName, customer.FullName, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        Console.WriteLine("❌ This customer already has a pet with that name.");
-                        petName = "";
-                    }
-
-                } while (string.IsNullOrWhiteSpace(petName));
+                    break;
+                }
                 pet.Name = petName;
 
                 // Validar tipo de mascota
                 string petType;
-                do
+                while (true)
                 {
                     Console.Write("Enter pet type: ");
                     petType = (Console.ReadLine() ?? "").Trim();
-                    if (string.IsNullOrWhiteSpace(petType))
-                        Console.WriteLine("❌ Pet type cannot be empty.");
-                } while (string.IsNullOrWhiteSpace(petType));
+
+                    if (string.IsNullOrWhiteSpace(petType) || petType.Length < 2)
+                    {
+                        Console.WriteLine("❌ Pet type must have at least 3 characters.");
+                        continue;
+                    }
+                    break;
+                }
                 pet.Type = petType;
 
                 // Validar edad de mascota
@@ -88,6 +92,7 @@ namespace HealthClinic.Services
                     Console.Write("Enter pet age: ");
                     if (int.TryParse(Console.ReadLine(), out petAge) && petAge > 0)
                         break;
+
                     Console.WriteLine("❌ Invalid pet age. Please enter a positive number.");
                 }
                 pet.Age = petAge;
@@ -96,7 +101,7 @@ namespace HealthClinic.Services
 
                 // Guardar en la lista
                 list.Add(customer);
-                Console.WriteLine("✅ Customer and pet registered successfully.");
+                Console.WriteLine("✅ Customer and Pet registered successfully.");
             }
             catch (Exception ex)
             {
@@ -104,7 +109,7 @@ namespace HealthClinic.Services
             }
         }
 
-        // ✅ Listar clientes
+        // ✅ Método: listar clientes
         public static void Listcustomers(List<Customer> list)
         {
             if (list.Count == 0)
@@ -120,7 +125,7 @@ namespace HealthClinic.Services
             }
         }
 
-        // ✅ Buscar cliente
+        // ✅ Método: buscar cliente por nombre
         public static void SearchcustomerByName(List<Customer> list, string name)
         {
             var customer = list.FirstOrDefault(p =>
@@ -133,7 +138,7 @@ namespace HealthClinic.Services
             }
             else
             {
-                Console.WriteLine("Customer not found.");
+                Console.WriteLine("❌ Customer not found.");
             }
         }
     }
