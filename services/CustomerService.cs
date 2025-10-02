@@ -99,7 +99,7 @@ namespace HealthClinic.Services
             foreach (var p in list)
             {
                 Console.WriteLine($"Name: {p.FullName}, adress: {p.Adress}");
-                Console.WriteLine($"   Pet: {p.Pet.Name}, Type: {p.Pet.Type}, Age: {p.Pet.Age} ,owner: {p.Pet.OwnerName}, breed: {p.Pet.Breed}");
+                Console.WriteLine($"   Pet: {p.Pet.Name}, Type: {p.Pet.Type}, Age: {p.Pet.Age} ,owner: {p.FullName} :breed {p.Pet.Breed}");
             }
         }
 
