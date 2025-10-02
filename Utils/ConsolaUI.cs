@@ -54,7 +54,7 @@ namespace HealthClinic.Utils
                             Veterinarian = vetName
                         };
 
-                        // Tomamos al primer cliente como ejemplo
+                        // Tomamos
                         var customer = customers[0];
 
                         // Atender

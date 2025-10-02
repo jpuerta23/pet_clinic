@@ -24,10 +24,11 @@ namespace HealthClinic.Models
         {
             try
             {
-                // Crear un paciente
+                // create a new customer
                 var customer = new Customer();
 
-                // Pedir datos del paciente
+                // date and time of registration
+                
                 Console.Write("Enter customer full name: ");
                 customer.FullName = Console.ReadLine() ?? "Unknown";
 

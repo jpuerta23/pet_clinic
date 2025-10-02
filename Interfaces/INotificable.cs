@@ -7,6 +7,8 @@ namespace pet_clinic.Interfaces
 {
     public interface INotificable
     {
+
+        // Method to send a notification
         void SendNotify(string message);
     }
 }

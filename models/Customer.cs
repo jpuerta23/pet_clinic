@@ -7,7 +7,7 @@ public class Customer: INotificable
 {
 
 
-    // Siempre tendrá un valor inicial, nunca null
+    // Customer details
     public string FullName { get; set; } = string.Empty;
     public int Age { get; set; } = 0;
     public string Adress { get; set; } = string.Empty;
@@ -16,7 +16,7 @@ public class Customer: INotificable
     
 
 
-
+//
     public Pet Pet { get; set; } = new Pet();
     
 
@@ -29,7 +29,7 @@ public class Customer: INotificable
     }
 
 
-    // Método para obtener una informacion del paciente
+    // Method to view customer information
     public string Viewinformation()
     {
         return $"customer: {FullName}, adress: {Adress}, Pet: {Pet.Name}, Type: {Pet.Type}";
