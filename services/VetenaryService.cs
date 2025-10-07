@@ -14,7 +14,7 @@ public class VeterinaryService : IAtendible
     // Atender a un paciente
     public void Attend(Customer customer)
     {
-        Console.WriteLine($"👨‍⚕️ {Veterinarian} is is taking care of {customer.FullName}'s Pet {customer.Pet.Name}  .");
+        Console.WriteLine($"👨‍⚕️ {Veterinarian} is taking care of {customer.FullName}'s Pet {customer.Pet.Name}  .");
     }
 
     // Vacunar a la mascota de un paciente

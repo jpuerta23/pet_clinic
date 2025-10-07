@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/Coder/pet_clinic/pet_clinic.csproj",
+      "projectUniqueName": "/home/Coder/Vídeos/pet_clinic/pet_clinic.csproj",
       "projectName": "pet_clinic",
-      "projectPath": "/home/Coder/pet_clinic/pet_clinic.csproj",
+      "projectPath": "/home/Coder/Vídeos/pet_clinic/pet_clinic.csproj",
       "packagesPath": "/home/Coder/.nuget/packages/",
-      "outputPath": "/home/Coder/pet_clinic/obj/",
+      "outputPath": "/home/Coder/Vídeos/pet_clinic/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/Coder/.nuget/NuGet/NuGet.Config"

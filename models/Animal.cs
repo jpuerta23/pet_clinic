@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HealthClinic.Models;
 
-public class Animal
+public abstract class Animal
 {
     // Nombre del animal, inicializado para evitar null
     public string Name { get; set; } = string.Empty;

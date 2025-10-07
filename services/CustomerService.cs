@@ -2,7 +2,7 @@ using HealthClinic.Models;
 
 namespace HealthClinic.Services
 {
-    public class CustomerService : IRegister
+    public class CustomerService : IRegister<List<Customer>>
     {
         public void Registercustomer(List<Customer> list)
         {

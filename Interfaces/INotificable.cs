@@ -9,6 +9,6 @@ namespace pet_clinic.Interfaces
     {
 
         // Method to send a notification
-        void SendNotify(string message);
+        void SendNotify( string message);
     }
 }
