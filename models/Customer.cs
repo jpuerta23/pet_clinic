@@ -2,7 +2,7 @@ using pet_clinic.Interfaces;
 
 namespace HealthClinic.Models;
 
-public class Customer : INotificable
+public class Customer : INotificable<Customer>
 {
     private static int _nextId = 1;
 
@@ -22,10 +22,11 @@ public class Customer : INotificable
         Adress = string.Empty;
     }
 
-    public void SendNotify(string message)
-    {
-        Console.WriteLine($"Notification sent to {FullName}: {message}");
-    }
+    public void SendNotify(Customer customer)
+{
+    Console.WriteLine($"📅 Reminder: {customer.FullName}, you have an appointment scheduled for today!");
+}
+
 
     public string Viewinformation()
     {

@@ -87,6 +87,7 @@ namespace HealthClinic.Services
 
             _appointments.Add(appointment);
             Console.WriteLine($"✅ Appointment scheduled successfully for {customer.FullName} with {assignedVet.Name}.");
+            customer.SendNotify(customer);
         }
 
         // ✅ Mostrar citas existentes

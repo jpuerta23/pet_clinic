@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace pet_clinic.Interfaces
 {
-    public interface INotificable
+    public interface INotificable<T>
     {
-
-        // Method to send a notification
-        void SendNotify( string message);
+        // Method to send a notification to a specific entity
+        void SendNotify(T item);
     }
 }

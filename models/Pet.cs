@@ -11,15 +11,19 @@ namespace HealthClinic.Models
         
         
         // Override the Emitsound method for specific pet sounds
-        public override string Emitsound()
-        {
-            return Type.ToLower() switch
-            {
-                "Dog" => "Guau",
-                "Cat" => "Miau",
-                "Bird" => "Pío",
-                _ => "unknown sound"
-            };
-        }
+      public override string Emitsound()
+{
+    string type = Type.Trim().ToLower();
+
+    return type switch
+    {
+        "dog" or "perro" => "🐶 Guau guau!",
+        "cat" or "gato"  => "🐱 Miau miau!",
+        "bird" or "pajaro" or "ave" => "🐦 Pío pío!",
+        "hamster" => "🐹 Squeak squeak!",
+        _ => "🤔 Unknown sound"
+    };
+}
+
     }
 }
