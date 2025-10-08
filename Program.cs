@@ -1,10 +1,25 @@
-﻿using System.Collections.Generic;
-using HealthClinic.Models;
+﻿using HealthClinic.Models;
 using HealthClinic.Services;
 using HealthClinic.Utils;
 
-List<Customer> customers = new List<Customer>();
-CustomerService service = new CustomerService();  //Instance
+var customers = new List<Customer>();
 
-ConsolaUI.MostrarMenu(customers, service); //FUNCTION MENU
+// Crear veterinarios por defecto
+var veterinarians = new List<Veterinarian>
+{
+    new Veterinarian { Name = "Dr. Smith", Specialty = "Internal medicine" },
+    new Veterinarian { Name = "Dr. Lopez", Specialty = "surgeon" },
+    new Veterinarian { Name = "Dr. Kim", Specialty = "Pathology" }
+};
+
+var customerService = new CustomerService();
+var veterinaryService = new VeterinaryService(veterinarians);
+
+// Mostrar menú principal
+ConsolaUI.MostrarMenu(customers, customerService, veterinaryService);
+
+
+
+
+
 
