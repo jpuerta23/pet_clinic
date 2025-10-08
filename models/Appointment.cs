@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HealthClinic.Models
-
 {
     public class Appointment
     {
-         private static int _nextId = 1;
+        private static int _nextId = 1;
 
         public int Id { get; private set; }
         public Customer Customer { get; set; }
@@ -22,12 +18,13 @@ namespace HealthClinic.Models
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         {
             Id = _nextId++;
-            Date = DateTime.Now;
+            
         }
 
         public override string ToString()
         {
-            return $"Appointment ID: {Id}, Date: {Date}, Customer: {Customer.FullName}, Pet: {Pet.Name}, Vet: {Veterinarian.Name}, Reason: {Reason}";
+            return $"Appointment ID: {Id}, Date: {Date:dd/MM/yyyy HH:mm}, " +
+                   $"Customer: {Customer.FullName}, Pet: {Pet.Name}, Vet: {Veterinarian.Name}, Reason: {Reason}";
         }
     }
 }
