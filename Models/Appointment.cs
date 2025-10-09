@@ -13,18 +13,21 @@ namespace HealthClinic.Models
         public DateTime Date { get; set; }
         public string Reason { get; set; }
 
+        public string Status { get; set; }
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         public Appointment()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
         {
             Id = _nextId++;
-            
+            Status = "Pending";
+           
         }
 
         public override string ToString()
         {
             return $"Appointment ID: {Id}, Date: {Date:dd/MM/yyyy HH:mm}, " +
-                   $"Customer: {Customer.FullName}, Pet: {Pet.Name}, Vet: {Veterinarian.Name}, Reason: {Reason}";
+                   $"Customer: {Customer.FullName}, Pet: {Pet.Name}, Vet: {Veterinarian.FullName}, Reason: {Reason}  Status: {Status}";
         }
     }
 }

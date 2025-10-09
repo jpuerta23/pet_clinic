@@ -1,3 +1,4 @@
+using System.Globalization;
 using HealthClinic.Models;
 
 namespace HealthClinic.Services
@@ -39,20 +40,44 @@ namespace HealthClinic.Services
         }
         customer.FullName = name;
 
+        // --- Validar teléfono ---
+        string phone;
+        while (true)
+        {
+            Console.Write("Enter customer Phone number: ");
+            phone = (Console.ReadLine() ?? "").Trim();
+
+            if (string.IsNullOrWhiteSpace(phone))
+            {
+                Console.WriteLine("❌ Phone number cannot be empty.");
+                continue;
+            }
+
+            // Validar formato (solo números y opcional '+')
+            if (!System.Text.RegularExpressions.Regex.IsMatch(phone, @"^\+?\d{8,15}$"))
+            {
+                Console.WriteLine("❌ Invalid phone number. Use only digits (and optional '+'), at least 8 characters.");
+                continue;
+            }
+
+            break;
+        }
+        customer.Phone = phone; // ✅ Asegúrate de tener esta propiedad en tu clase Customer
+
         // --- Validar dirección ---
-        string adress;
+        string address;
         while (true)
         {
             Console.Write("Enter customer Address: ");
-            adress = (Console.ReadLine() ?? "").Trim();
+            address = (Console.ReadLine() ?? "").Trim();
 
-            if (string.IsNullOrWhiteSpace(adress))
+            if (string.IsNullOrWhiteSpace(address))
             {
                 Console.WriteLine("❌ Address cannot be empty.");
                 continue;
             }
 
-            if (adress.Length < 5)
+            if (address.Length < 5)
             {
                 Console.WriteLine("❌ Address must have at least 5 characters.");
                 continue;
@@ -60,7 +85,7 @@ namespace HealthClinic.Services
 
             break;
         }
-        customer.Adress = adress;
+        customer.Adress = address;
 
         // --- Validar edad ---
         int age;
@@ -90,7 +115,7 @@ namespace HealthClinic.Services
 
         Console.WriteLine("\n✅ Customer registered successfully!");
         Console.WriteLine("===============================");
-        Console.WriteLine(customer.Viewinformation());
+        ConsoleHelper.WriteSuccess(customer.Viewinformation());
         Console.WriteLine("===============================\n");
     }
     catch (Exception ex)
@@ -113,7 +138,7 @@ namespace HealthClinic.Services
             foreach (var c in list)
             {
                 Console.WriteLine($"----------------------------------------");
-                Console.WriteLine($"ID: {c.Id}, Name: {c.FullName}, Address: {c.Adress}");
+                ConsoleHelper.WriteSuccess($"ID: {c.Id}, Name: {c.FullName}, Address: {c.Adress}");
 
                 if (c.Pets == null || c.Pets.Count == 0)
                 {
@@ -124,7 +149,7 @@ namespace HealthClinic.Services
                     Console.WriteLine("   Pets:");
                     foreach (var pet in c.Pets)
                     {
-                        Console.WriteLine($"      • Name: {pet.Name}, Type: {pet.Type}, Age: {pet.Age}, Breed: {pet.Breed}");
+                        Console.WriteLine($"      • Name: {pet.Name}, Type: {pet.Type}, Age: {pet.Age} años , Breed: {pet.Breed}");
                     }
                 }
             }
@@ -153,7 +178,7 @@ namespace HealthClinic.Services
                     Console.WriteLine("   Pets:");
                     foreach (var pet in customer.Pets)
                     {
-                        Console.WriteLine($"      • Name: {pet.Name}, Type: {pet.Type}, Age: {pet.Age}, Breed: {pet.Breed}");
+                        Console.WriteLine($"     • Name: {pet.Name},  Type: {pet.Type},   Age: {pet.Age},   Breed: {pet.Breed}");
                     }
                 }
             }
@@ -170,7 +195,7 @@ namespace HealthClinic.Services
         {
             if (list.Count == 0)
             {
-                Console.WriteLine("⚠️ No customers registered yet.");
+                ConsoleHelper.WriteError("⚠️ No customers registered yet.");
                 return;
             }
 
@@ -182,36 +207,78 @@ namespace HealthClinic.Services
 
             if (customer == null)
             {
-                Console.WriteLine("❌ Customer not found.");
+                ConsoleHelper.WriteError("❌ Customer not found.");
                 return;
             }
 
             var newPet = new Pet();
 
-            Console.Write("Enter pet name: ");
-            newPet.Name = Console.ReadLine() ?? "";
-
-            Console.Write("Enter pet type: ");
-            newPet.Type = Console.ReadLine() ?? "";
-
-            Console.Write("Enter pet age: ");
-            if (!int.TryParse(Console.ReadLine(), out int petAge) || petAge <= 0)
+            // 🐾 Validar nombre
+            while (true)
             {
-                Console.WriteLine("❌ Invalid pet age.");
-                return;
+                Console.Write("Enter pet name: ");
+                newPet.Name = (Console.ReadLine() ?? "").Trim();
+
+                if (string.IsNullOrWhiteSpace(newPet.Name) || newPet.Name.Length < 2)
+                {
+                    ConsoleHelper.WriteError("❌ Pet name must have at least 2 characters.");
+                    continue;
+                }
+
+                if (customer.Pets.Any(p => string.Equals(p.Name, newPet.Name, StringComparison.OrdinalIgnoreCase)))
+                {
+                    ConsoleHelper.WriteError($"❌ {customer.FullName} already has a pet named '{newPet.Name}'.");
+                    return;
+                }
+
+                break;
             }
-            newPet.Age = petAge;
+
+            // 🐾 Validar tipo
+            while (true)
+            {
+                Console.Write("Enter pet type: ");
+                newPet.Type = (Console.ReadLine() ?? "").Trim();
+
+                if (string.IsNullOrWhiteSpace(newPet.Type) || newPet.Type.Length < 3)
+                {
+                    ConsoleHelper.WriteError("❌ Pet type must have at least 3 characters.");
+                    continue;
+                }
+                break;
+            }
+
+            // 🐾 Validar edad (permite decimales, ej: 1.5)
+            double petAge;
+            while (true)
+            {
+                Console.Write("Enter pet age (you can use decimals, e.g., 1.5): ");
+                string input = (Console.ReadLine() ?? "").Trim();
+
+                // 🔹 Se fuerza el uso del punto (.) como separador decimal
+                if (double.TryParse(input, NumberStyles.Float, CultureInfo.InvariantCulture, out petAge) && petAge > 0)
+                {
+                    newPet.Age = petAge;
+                    break;
+                }
+
+                ConsoleHelper.WriteError("❌ Invalid pet age. Please enter a positive number (e.g., 2 or 1.5).");
+            }
 
             Console.Write("Enter pet breed: ");
             newPet.Breed = Console.ReadLine() ?? "";
 
-            // Agregar mascota al cliente
-            // Agregar mascota al cliente
+            // ✅ Agregar mascota al cliente
             customer.Pets.Add(newPet);
-            Console.WriteLine($"✅ Pet '{newPet.Name}' added successfully to {customer.FullName}.");
-            Console.WriteLine($"Sound: {newPet.Emitsound()}");
+            ConsoleHelper.WriteSuccess($"✅ Pet '{newPet.Name}' added successfully to {customer.FullName}.");
 
-
+            // 🐶 Mostrar detalles de la mascota
+            Console.WriteLine("\n🐾 Pet details:");
+            Console.WriteLine($"   Name: {newPet.Name}");
+            Console.WriteLine($"   Type: {newPet.Type}");
+            Console.WriteLine($"   Age: {newPet.Age:F1} years");
+            Console.WriteLine($"   Breed: {newPet.Breed}");
+            Console.WriteLine($"   Sound: {newPet.Emitsound()}");
         }
 
     }

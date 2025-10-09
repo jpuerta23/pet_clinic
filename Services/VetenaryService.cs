@@ -64,7 +64,7 @@ namespace HealthClinic.Services
     Console.WriteLine("\nAvailable veterinarians:");
     foreach (var vet in _veterinarians)
     {
-        Console.WriteLine($"ID: {vet.Id} - {vet.Name} ({vet.Specialty})");
+        Console.WriteLine($"ID: {vet.Id} - {vet.FullName} ({vet.Specialty})");
     }
 
     Console.Write("Enter veterinarian ID to assign: ");
@@ -112,7 +112,7 @@ namespace HealthClinic.Services
 
     _appointments.Add(appointment);
 
-    Console.WriteLine($"✅ Appointment scheduled successfully for {customer.FullName} with {assignedVet.Name} on {appointmentDate:dd/MM/yyyy HH:mm}.");
+    ConsoleHelper.WriteSuccess($"✅ Appointment scheduled successfully for {customer.FullName} with {assignedVet.FullName} on {appointmentDate:dd/MM/yyyy HH:mm}.");
 
     // 🔔 Enviar notificación al cliente
     customer.SendNotify(customer);
@@ -124,14 +124,14 @@ namespace HealthClinic.Services
         {
             if (_appointments.Count == 0)
             {
-                Console.WriteLine("No appointments scheduled yet.");
+                ConsoleHelper.WriteError("No appointments scheduled yet.");
                 return;
             }
 
             Console.WriteLine("\n📋 Appointments List:");
             foreach (var app in _appointments)
             {
-                Console.WriteLine(app.ToString());
+                ConsoleHelper.WriteSuccess(app.ToString());
             }
         }
     }

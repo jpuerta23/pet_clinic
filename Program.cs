@@ -1,25 +1,21 @@
-﻿using HealthClinic.Models;
+﻿using System;
+using System.Collections.Generic;
+using HealthClinic.Models;
 using HealthClinic.Services;
 using HealthClinic.Utils;
 
-var customers = new List<Customer>();
-
-// Crear veterinarios por defecto
-var veterinarians = new List<Veterinarian>
+class Program
 {
-    new Veterinarian { Name = "Dr. Smith", Specialty = "Internal medicine" },
-    new Veterinarian { Name = "Dr. Lopez", Specialty = "surgeon" },
-    new Veterinarian { Name = "Dr. Kim", Specialty = "Pathology" }
-};
+    static void Main()
+    {
+        // 🧩 Cargar datos por defecto
+        var customers = DefaultData.GetDefaultCustomers();
+        var veterinarians = DefaultData.GetDefaultVeterinarians();
+        // instanciar los servicios
+        var customerService = new CustomerService();
+        var veterinaryService = new VeterinaryService(veterinarians);
 
-var customerService = new CustomerService();
-var veterinaryService = new VeterinaryService(veterinarians);
-
-// Mostrar menú principal
-ConsolaUI.MostrarMenu(customers, customerService, veterinaryService);
-
-
-
-
-
-
+        // 🚀 Iniciar menú principal
+        ConsolaUI.MostrarMenu(customers, customerService, veterinaryService);
+    }
+}

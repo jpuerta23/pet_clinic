@@ -12,7 +12,7 @@ public abstract class Animal
     public string Type { get; set; } = string.Empty;
 
     // Edad inicial en 0
-    public int Age { get; set; } = 0;
+    public double Age { get; set; } = 0;
 
    
 
